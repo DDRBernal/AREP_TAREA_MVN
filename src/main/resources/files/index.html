@@ -2,58 +2,46 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>AREP</title>
 </head>
 <body>
+<script src="./Scripts/connection.js"></script>
+<main class="main-container">
+    <h1 class="title">Consult the stock market of the shares traded on the Stock Exchange</h1>
 
-</body>
-</html>a
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Form Example</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-<h1>Form with GET</h1>
-<form action="/hello">
-    <label for="name">Name:</label><br>
-    <input type="text" id="name" name="name" value="John"><br><br>
-    <input type="button" value="Submit" onclick="loadGetMsg()">
-</form>
-<div id="getrespmsg"></div>
+    <div >
+        <div >
+            <h3>Type the word of a share traded</h3>
+            <input type="text" id=word_share_traded placeholder="For example MSFT">
+                <button type="button" onclick="getData()">Search</button>
+            <div>
+                <input type="radio" name="time" id="Time_Series_Daily" checked>
+                <label for="Time_Series_Daily"> Daily </label>
+            </div>
+            <div >
+                <input type="radio" name="time" id="Time_Series_Weekly">
+                <label for="Time_Series_Weekly"> Weekly </label>
+            </div>
+            <div>
+                <input type="radio" name="time" id="Time_Series_Monthly">
+                <label for="Time_Series_Monthly"> Monthly </label>
+            </div>
+        </div>
 
-<script>
-            function loadGetMsg() {
-                let nameVar = document.getElementById("name").value;
-                const xhttp = new XMLHttpRequest();
-                xhttp.onload = function() {
-                    document.getElementById("getrespmsg").innerHTML =
-                    this.responseText;
-                }
-                xhttp.open("GET", "/hello?name="+nameVar);
-                xhttp.send();
-            }
-        </script>
+        <table cellspacing="4" width="90%">
+            <tbody id="table_elements">
+            <thead>
+                <th style="background-color:#b4b3b7">Date</th>
+                <th style="background-color:#b4b3b7">1. Open</th>
+                <th style="background-color:#b4b3b7">2. High</th>
+                <th style="background-color:#b4b3b7">3. Low</th>
+                <th style="background-color:#b4b3b7">4. Close</th>
+                <th style="background-color:#b4b3b7">5. Volume</th>
+            </thead>
+            </tbody>
+        </table>
+    </div>
+</main>
 
-<h1>Form with POST</h1>
-<form action="/hellopost">
-    <label for="postname">Name:</label><br>
-    <input type="text" id="postname" name="name" value="John"><br><br>
-    <input type="button" value="Submit" onclick="loadPostMsg(postname)">
-</form>
-
-<div id="postrespmsg"></div>
-
-<script>
-            function loadPostMsg(name){
-                let url = "/hellopost?name=" + name.value;
-
-                fetch (url, {method: 'POST'})
-                    .then(x => x.text())
-                    .then(y => document.getElementById("postrespmsg").innerHTML = y);
-            }
-        </script>
 </body>
 </html>

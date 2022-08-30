@@ -1,27 +1,30 @@
 package edu.escuelaing.arem;
 
+import spark.Filter;
+import spark.Request;
+
 import static spark.Spark.*;
 
 public class SparkWebApp {
 
     public static void main(String[] args) {
         port(getPort());
-        staticFiles.location("files");
-        get("/hello", (req, res) -> "Hello Heroku");
+        staticFiles.location("/files");
 
-        get("/intraday",(req,res)  -> {
-            res.type("application/json");
-            return HttpConnectionExample.getAPI();
+        after((Filter) (request, response) -> {
+            response.header("Access-Control-Allow-Origin", "*");
+            response.header("Access-Control-Allow-Methods", "GET");
         });
 
-        get("/homePage", (req, res) -> {
-            res.redirect("/index.html");
-
-            return null;
-        });
+        get("/homePage","application/json", (req, res) -> HttpConnection.getAPI(req));
     }
 
-    static int getPort() {
+
+    /**
+     * Funcion destinada a retornar el puerto por el cual correrá nuestra app
+     * @return el puerto que encuentre segun la variable de entorno PORT, sino el 4567 por defecto
+     */
+    private static int getPort() {
         if (System.getenv("PORT") != null) {
             System.out.println(System.getenv("PORT"));
             return Integer.parseInt(System.getenv("PORT"));
