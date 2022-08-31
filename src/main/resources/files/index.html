@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AREP</title>
+</head>
+<body>
+<script src="./Scripts/connection.js"></script>
+<main class="main-container">
+    <h1 class="title">Consult the stock market of the shares traded on the Stock Exchange</h1>
+
+    <div >
+        <div >
+            <h3>
+                Type the word of a share traded
+            </h3>
+            <input type="text" id=word_share_traded placeholder="For example MSFT">
+
+                <button type="button" onclick="getData()">Search</button>
+
+                <input type="radio" name="time" id="Time_Series_Daily" checked>
+                <label for="Time_Series_Daily"> Daily </label>
+
+                <input type="radio" name="time" id="Time_Series_Weekly">
+                <label for="Time_Series_Weekly"> Weekly </label>
+
+                <input type="radio" name="time" id="Time_Series_Monthly">
+                <label for="Time_Series_Monthly"> Monthly </label>
+        </div>
+
+        <table cellspacing="4" width="90%">
+            <tbody id="table_elements">
+            <thead>
+                <th style="background-color:#b4b3b7">0. Date</th>
+                <th style="background-color:#b4b3b7">1. Open</th>
+                <th style="background-color:#b4b3b7">2. High</th>
+                <th style="background-color:#b4b3b7">3. Low</th>
+                <th style="background-color:#b4b3b7">4. Close</th>
+                <th style="background-color:#b4b3b7">5. Volume</th>
+            </thead>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+</body>
+</html>
