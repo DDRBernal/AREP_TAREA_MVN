@@ -17,36 +17,37 @@ public class HttpConnection {
     private static final String SerialKEY = "4M76WMCIMJW816IN";
     //"https://api.polygon.io/v1/open-close/AAPL/2020-10-14?adjusted=true&apiKey=zrGIGJki8d4Mv0WvPo1mSA73b2nFWsl4";
 
+    /**
+     *
+     * @param req
+     * @return
+     * @throws IOException
+     */
     public static String getAPI(Request req) throws IOException {
         Cache cache = Cache.getCache();
         String GET_URL = "https://www.alphavantage.co/query?function=%s&symbol=%s&apikey="+SerialKEY;
         URL obj = new URL(GET_URL);
         String reponseAPI  = "";
-        if (cache.getCacheMap().containsKey("keycache")){
-            reponseAPI = cache.getCacheMap().get("keycache");
+        String keyCache = req.queryParams("word_share_traded")+req.queryParams("time_series");
+        if (cache.getCacheMap().containsKey(keyCache)){
+            reponseAPI = cache.getCacheMap().get(keyCache);
         } else {
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
             con.setRequestMethod("GET");
             con.setRequestProperty("User-Agent", USER_AGENT);
-            //The following invocation perform the connection implicitly before getting the code
             int responseCode = con.getResponseCode();
-            System.out.println("GET Response Code :: " + responseCode);
-            if (responseCode == HttpURLConnection.HTTP_OK) { // success
+            if (responseCode == HttpURLConnection.HTTP_OK) {
                 BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
                 String inputLine;
                 StringBuffer response = new StringBuffer();
                 while ((inputLine = in.readLine()) != null) response.append(inputLine);
                 in.close();
-                // print result
-                System.out.println(response.toString());
                 reponseAPI =  response.toString();
                 cache.getCacheMap().put("",reponseAPI);
-                System.out.println(reponseAPI);
             } else {
                 System.out.println("GET request not worked");
             }
             System.out.println("GET DONE");
         } return reponseAPI;
     }
-
 } 

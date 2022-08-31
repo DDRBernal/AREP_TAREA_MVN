@@ -1,21 +1,31 @@
 /**
- * Esta funcion trae los datos mediante la API
+ * Esta funcion trae los datos de una tabla HTML para pasarlos a una matriz en JS y mostrarlos en la pagina
  */
 function getData() {
-    let result = {};
+    let vector_result = {};
     var word_share_traded = document.getElementById("word_share_traded").value;
-    let time_series = "TIME_SERIES_DAILY" ;
-    console.log("ICIIIIIIIIIIIIIIIIIIIII")
+    let time_series = "" ;
+    document.getElementById("Time_Series_Daily").checked ? time_series = "TIME_SERIES_DAILY" : "";
+    document.getElementById("Time_Series_Weekly").checked ? time_series = "TIME_SERIES_WEEKLY" : ""
+    document.getElementById("Time_Series_Monthly").checked ? time_series = "TIME_SERIES_MONTHLY" : ""
     //https://fast-hollows-06971.herokuapp.com/
-    console.log("https://www.alphavantage.co/?queryfunction=TIME_SERIES_DAILY&symbol="+word_share_traded+"&apikey=demo")
-    //https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol='+symbol+'&apikey=demo
     fetch('https://www.alphavantage.co/query?function='+time_series+'&symbol='+word_share_traded+'&apikey=demo')
-        .then(res => res.json())
-        .then(matriz_data => result = matriz_data)
-        .then(matriz_data => {
-            console.log("AUTREEEEEE")
-            console.log(matriz_data)
-            //
-        })
-        .catch(error => console.log(error))
+        .then(results => results.json()).then(data => vector_result = data).then(data => {
+            const table_elements = document.querySelector('#table_elements')
+            table_elements.innerHTML = ""; delete data ['Meta Data'];
+            for (let i in data) {
+                for (let j in data[i]) {
+                    const row = document.createElement("tr");
+                    const cell = document.createElement("th");
+                    table_elements.appendChild(row);
+                    cell.innerHTML = j;
+                    row.appendChild(cell);
+                    for (let k in data[i][j]) {
+                        const cellText = document.createElement("td");
+                        cellText.innerHTML = data[i][j][k];
+                        row.appendChild(cellText);
+                    }
+                }
+            }
+        }).catch(error => console.log(error))
 }

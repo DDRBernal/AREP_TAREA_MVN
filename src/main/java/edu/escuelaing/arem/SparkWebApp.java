@@ -10,12 +10,10 @@ public class SparkWebApp {
     public static void main(String[] args) {
         port(getPort());
         staticFiles.location("/files");
-
         after((Filter) (request, response) -> {
             response.header("Access-Control-Allow-Origin", "*");
             response.header("Access-Control-Allow-Methods", "GET");
         });
-
         get("/homePage","application/json", (req, res) -> HttpConnection.getAPI(req));
     }
 
