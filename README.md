@@ -20,7 +20,7 @@ Esta aplicación sirve para consultar el mercado de valores de las acciones nego
 
 ![image](https://user-images.githubusercontent.com/46855679/187592645-a8ee0909-0b3c-467d-8ce8-2bf854f38894.png)
 
-Esta aplicación utiliza una conexion en HTML muy simple, si se quisiera añadir un servicio adicional basta con simplemente añadir un metodo en la clase HttpConnection con lo que deseemos, tanto el HTML como el JavaScript contiene lo basico para hacer funcionar la aplicación, por lo tanto es bien extensible añadiendo nuevas funciones.
+Esta aplicación utiliza una conexion en HTML muy simple, si se quisiera agregar un servicio adicional basta con simplemente añadir un metodo en la clase HttpConnection con lo que deseemos, tanto el HTML como el JavaScript contiene lo basico para hacer funcionar la aplicación, por lo tanto es bien extensible añadiendo nuevas funciones.
 
 
 ### Heroku
